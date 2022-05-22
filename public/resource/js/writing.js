@@ -37,7 +37,8 @@ function initEditor() {
 function uploadImage(file, cb) {
   const config = {
     useCdnDomain: true,
-    region: qiniu.region.z1
+    //自行改七牛云空间区域配置https://developer.qiniu.com/kodo/1671/region-endpoint-fq
+    region: qiniu.region.cn-east-2
   };
   const putExtra = {
   };
@@ -59,7 +60,7 @@ function uploadImage(file, cb) {
         },
         complete(res){
           console.log(res)
-          cb("https://static.mszlu.com/" + res.key)
+          cb("iovip-cn-east-2.qiniuio.com" + res.key)
         }
       }
       const subscription = observable.subscribe(observer) // 上传开始
