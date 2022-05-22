@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f1da9fbe-646c-4bf5-aee0-c2dc93415f8b" name="goblog" url="http://139.159.245.51">
+        <fileTransfer accessType="SFTP" host="139.159.245.51" port="22" sshConfigId="e6472273-9903-4c7b-8e50-c6de5fdf438f" sshConfig="root@139.159.245.51:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
