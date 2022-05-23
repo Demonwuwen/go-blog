@@ -16,3 +16,6 @@
     ValineAppid = "PrW0gLRbdappVsTOpxenpLg4-gzGzoHsz"
     ValineAppkey = "FdPQWzyCgUfQciCrs0zGyuEr"
     ValineServerURL = "https://prw0glrb.lc-cn-n1-shared.com"
+[server]
+    Ip = "127.0.0.1"
+    Port = "8088"

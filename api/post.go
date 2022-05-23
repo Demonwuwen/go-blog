@@ -101,3 +101,12 @@ func (*Api) SaveAndUpdatePost(w http.ResponseWriter, r *http.Request) {
 	}
 	common.GetRequestJsonParam(r)
 }
+
+func (*Api)SearchPost(w http.ResponseWriter, r *http.Request)  {
+	condition := r.Form.Get("val")
+	searchRes, err:=service.SearchPost(condition)
+	if err !=nil {
+		common.Error(w,err)
+	}
+	common.Success(w,searchRes)
+}

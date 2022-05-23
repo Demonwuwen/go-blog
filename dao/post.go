@@ -115,30 +115,40 @@ func GetPostAll() ([]models.Post, error) {
 	return posts, nil
 }
 
-func GetPostById(pid int) (models.Post, error) {
-	row := DB.QueryRow("select * from blog_post where pid = ?", pid)
-	var post models.Post
-	if row.Err() != nil {
-		return post, row.Err()
-	}
-	err := row.Scan(
-		&post.Pid,
-		&post.Title,
-		&post.Content,
-		&post.Markdown,
-		&post.CategoryId,
-		&post.UserId,
-		&post.ViewCount,
-		&post.Type,
-		&post.Slug,
-		&post.CreateAt,
-		&post.UpdateAt,
-	)
-	if err != nil {
-		return post, err
-	}
-	return post, nil
+func GetPostById(pid int) (*models.Post, error) {
+	p := &models.Post{}
+	err := DB.QueryOne(p, "select * from blog_post where pid = ?", pid)
+	return p,err
+	//row := DB.QueryRow("select * from blog_post where pid = ?", pid)
+	//var post models.Post
+	//if row.Err() != nil {
+	//	return post, row.Err()
+	//}
+	//err := row.Scan(
+	//	&post.Pid,
+	//	&post.Title,
+	//	&post.Content,
+	//	&post.Markdown,
+	//	&post.CategoryId,
+	//	&post.UserId,
+	//	&post.ViewCount,
+	//	&post.Type,
+	//	&post.Slug,
+	//	&post.CreateAt,
+	//	&post.UpdateAt,
+	//)
+	//if err != nil {
+	//	return post, err
+	//}
+	//return post, nil
 }
+
+func CountGetAllPostBySlug(cId int) (count int) {
+	rows := DB.QueryRow("select count(1) from blog_post where slug = ?", cId)
+	_ = rows.Scan(&count)
+	return
+}
+
 func CountGetAllPostByCategoryId(cId int) (count int) {
 	rows := DB.QueryRow("select count(1) from blog_post where category_id = ?", cId)
 	rows.Scan(&count)
@@ -181,26 +191,18 @@ func GetPostPageByCategoryId(cId, page, pageSize int) ([]models.Post, error) {
 	return posts, nil
 }
 
-func GetPostByCategoryId(cId, page, pageSize int) ([]models.Post, error) {
-	page = (page - 1) * pageSize
-	rows, err := DB.Query("select * from blog_post where category_id = ? limit ?,?", cId, page, pageSize)
+func GetSearchPost(val string) ([]models.SearchResp, error ){
+	//page = (page - 1) * pageSize
+	rows, err := DB.Query("select pid, title from blog_post where where title like", "%"+val+"%")
 	if err != nil {
 		return nil, err
 	}
-	var posts []models.Post
+	var posts []models.SearchResp
 	for rows.Next() {
-		var post models.Post
+		var post models.SearchResp
 		err = rows.Scan(&post.Pid,
+			&post.Pid,
 			&post.Title,
-			&post.Content,
-			&post.Markdown,
-			&post.CategoryId,
-			&post.UserId,
-			&post.ViewCount,
-			&post.Type,
-			&post.Slug,
-			&post.CreateAt,
-			&post.UpdateAt,
 		)
 		if err != nil {
 			return nil, err

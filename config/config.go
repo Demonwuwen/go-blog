@@ -8,6 +8,7 @@ import (
 type tomlConfig struct {
 	Viewer Viewer
 	System SystemConfig
+	Server ServerConfig
 }
 type Viewer struct {
 	Title       string
@@ -32,6 +33,10 @@ type SystemConfig struct {
 	ValineServerURL string
 }
 
+type ServerConfig struct {
+	Ip string
+	Port string
+}
 var Cfg *tomlConfig
 
 //程序启动时执行init方法

@@ -11,6 +11,11 @@ import (
 func SavePost(post *models.Post)  {
 	dao.SavePost(post)
 }
+
+func SearchPost(val string) ([]models.SearchResp,error) {
+	searchPost, err := dao.GetSearchPost(val)
+	return searchPost, err
+}
 func UpdatePost(post *models.Post)  {
 	dao.UpdatePost(post)
 }
