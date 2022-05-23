@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 func (*HTMLApi)Index(w http.ResponseWriter,r *http.Request)  {
@@ -27,7 +28,10 @@ func (*HTMLApi)Index(w http.ResponseWriter,r *http.Request)  {
 	}
 	//每页显示数量
 	pageSize := 10
-	hr, err := service.GetAllIndexInfo(page,pageSize)
+	path := r.URL.Path
+	slug := strings.TrimPrefix(path,"/")
+
+	hr, err := service.GetAllIndexInfo(slug,page,pageSize)
 
 	//hr,err := service.GetAllIndexInfo()
 	if err != nil {
@@ -35,6 +39,4 @@ func (*HTMLApi)Index(w http.ResponseWriter,r *http.Request)  {
 		index.WriteError(w, errors.New("系统错误， 请联系管理员!!"))
 	}
 	index.WriteData(w, hr)
-
-
 }

@@ -52,7 +52,7 @@ func (*Api) SaveAndUpdatePost(w http.ResponseWriter, r *http.Request) {
 		postType := params["type"].(float64)
 		ptype := int(postType)
 		post := &models.Post{
-			Pid:        -1,
+			//Pid:        -1,
 			Title:      title,
 			Slug:       slug,
 			Content:    content,
@@ -90,9 +90,9 @@ func (*Api) SaveAndUpdatePost(w http.ResponseWriter, r *http.Request) {
 			Markdown:   markdown,
 			CategoryId: categoryId,
 			UserId:     uid,
-			//ViewCount:  0,
+			ViewCount:  0,
 			Type:       ptype,
-			//CreateAt:   time.Now(),
+			CreateAt:   time.Now(),
 			UpdateAt:   time.Now(),
 		}
 		service.UpdatePost(post)

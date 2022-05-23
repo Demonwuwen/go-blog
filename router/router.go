@@ -25,6 +25,7 @@ func Router()  {
 	http.HandleFunc("/login",views.HTML.Login)
 	http.HandleFunc("/p/",views.HTML.Detail)
 	http.HandleFunc("/writing",views.HTML.Writing)
+	http.HandleFunc("/pigeonhole",views.HTML.Pigeonhole)
 	http.HandleFunc("/api/v1/post",api.API.SaveAndUpdatePost)
 	http.HandleFunc("/api/v1/post/",api.API.GetPost)
 	http.HandleFunc("//api/v1/qiniu/token",api.API.QiniuToken)
